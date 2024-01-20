@@ -1,8 +1,17 @@
 import random
 import pygame
 pygame.init()
+      
+file = open('score.txt', 'r')
+if len(file.read()) == 0:
+    file.close()
+    file = open('score.txt', 'w')
+    file.write('0')
+    highScore = 0
+    file.close()
 
 sc = WIDTH, HEIGHT = (600, 200)
+
 
 
 class Ground:
@@ -323,7 +332,6 @@ start_page = True
 mouse_pos = (-1, -1)
 
 score = 0
-highScore = 0
 
 game = True
 
@@ -339,6 +347,9 @@ while game:
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
+            file = open('score.txt', 'w')
+            file.write(highScore)
+            file.close()
             exit()
 
         if event.type == pygame.KEYDOWN:
